@@ -19,15 +19,16 @@ const Contact = {
   },
   buildCard(contact) {
     let fragment = document.createDocumentFragment()
-    let nameEl = this.buildEl("h2", {class: "contact__name"}, contact.name)
+    let nameEl = this.buildEl("h2", {class: "contact__name"}, `${contact.firstName} ${contact.lastName}`)
     let phoneEl = this.buildEl("p", {class: "contact__phone"}, contact.phone)
-    let addressEl = this.buildEl("p", {class:"contact__address"}, contact.address)
+    let streetEl = this.buildEl("p", {class:"contact__address"}, contact.address.street)
+    let cityStZipEl = this.buildEl("p", {class: "contact__address"}, `${contact.address.city}, ${contact.address.state} ${contact.address.zip}`)
     let deleteButton = this.buildEl("button", {class:"contact__delete"}, "Delete Contact")
     deleteButton.addEventListener("click", event => {
       ContactCollection.DELETE(contact.id)
         .then(() => document.querySelector(`#contact-${contact.id}`).remove())
     })
-    let wrapper = this.buildEl("article", {class: "contact-card", id: `contact-${contact.id}`}, null, nameEl, phoneEl, addressEl, deleteButton)
+    let wrapper = this.buildEl("article", {class: "contact-card", id: `contact-${contact.id}`}, null, nameEl, phoneEl, streetEl, cityStZipEl, deleteButton)
     fragment.appendChild(wrapper)
     return fragment
   }

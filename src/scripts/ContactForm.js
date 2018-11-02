@@ -13,15 +13,25 @@ const ContactForm = {
 
     // TODO: Add additional fields
     let form = document.querySelector("#contact-form")
-    let contactName = form.querySelector("#name").value
-    let contactPhone = form.querySelector("#phone").value
-    let contactAddress = form.querySelector("#address").value
+    let firstName = form.querySelector("#firstName").value
+    let lastName = form.querySelector("#lastName").value
+    let phone = form.querySelector("#phone").value
+    let street = form.querySelector("#street").value
+    let city = form.querySelector("#city").value
+    let state = form.querySelector("#state").value
+    let zip = form.querySelector("#zip").value
 
     // Put Data into Object
     let contact = {
-      name: contactName,
-      phone: contactPhone,
-      address: contactAddress
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      address: {
+        street: street,
+        city: city,
+        state: state,
+        zip: zip
+      }
     }
 
     // POST data to Database
