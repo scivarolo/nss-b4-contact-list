@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
 *, *:before, *:after {
@@ -23,7 +24,7 @@ html {
 }
 
 .contact-card {
-  flex-basis: 200px;
+  flex-basis: 250px;
   margin: 20px;
   background-color: rgb(240, 240, 240);
   padding: 20px;
@@ -32,6 +33,10 @@ html {
 }
 
 .contact__name {
+  margin-top: 0;
+}
+
+.contact__phone {
   margin-top: 0;
 }
 
