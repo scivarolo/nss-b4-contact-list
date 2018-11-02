@@ -4,9 +4,14 @@
 
 const ContactCollection = {
   url: "http://localhost:8088/contacts",
-  GET() {
+  GET(id) {
+    if(id) {
+      return fetch(`${this.url}/${id}`)
+        .then(response => response.json())
+    } else {
     return fetch(`${this.url}/?_sort=lastName,firstName&_order=asc`)
       .then(response => response.json())
+    }
   },
   POST(contact, form) {
     return fetch(this.url, {
@@ -29,6 +34,15 @@ const ContactCollection = {
     return fetch(this.url + "/" + id, {
       method: "DELETE"
     }).then(response => console.log(response))
+  },
+  PATCH(id, contact) {
+    return fetch(this.url + "/" + id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(contact)
+    })
   }
 }
 

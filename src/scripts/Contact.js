@@ -1,4 +1,5 @@
 import ContactCollection from "./ContactCollection";
+import ContactForm from "./ContactForm";
 
 /*
   A Contact component that displays a person's name, phone number, and address.
@@ -25,12 +26,22 @@ const Contact = {
     let cityStZipEl = this.buildEl("p", {class: "address__cityStZip"}, `${contact.address.city}, ${contact.address.state} ${contact.address.zip}`)
     let addressEl = this.buildEl("div", {class: "contact__address"}, null, streetEl, cityStZipEl)
 
+    let editButton = this.buildEl("button", {class:"contact__edit"}, "Edit")
+    editButton.addEventListener("click", event => {
+      let id = event.target.parentNode.parentNode.getAttribute("data-contact")
+      ContactCollection.GET(id)
+        .then(response => ContactForm.edit(response))
+    })
+
     let deleteButton = this.buildEl("button", {class:"contact__delete"}, "Delete")
-    deleteButton.addEventListener("click", event => {
+    deleteButton.addEventListener("click", () => {
       ContactCollection.DELETE(contact.id)
         .then(() => document.querySelector(`#contact-${contact.id}`).remove())
     })
-    let wrapper = this.buildEl("article", {class: "contact-card", id: `contact-${contact.id}`}, null, nameEl, phoneEl, addressEl, deleteButton)
+
+    let buttons = this.buildEl("div", {class: "contact__buttons"}, null, editButton, deleteButton)
+
+    let wrapper = this.buildEl("article", {"data-contact": contact.id, class: "contact-card", id: `contact-${contact.id}`}, null, nameEl, phoneEl, addressEl, buttons)
     fragment.appendChild(wrapper)
     return fragment
   }

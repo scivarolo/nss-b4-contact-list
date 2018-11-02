@@ -3,44 +3,8 @@
 */
 
 import ContactCollection from "./ContactCollection"
-import ContactList from "./ContactList"
-import Contact from "./Contact"
 
 const ContactForm = {
-  saveToDbThenOutput: (event) => {
-    // Get Data from Form
-    event.preventDefault()
-
-    // TODO: Add additional fields
-    let form = document.querySelector("#contact-form")
-    let firstName = form.querySelector("#firstName").value
-    let lastName = form.querySelector("#lastName").value
-    let phone = form.querySelector("#phone").value
-    let street = form.querySelector("#street").value
-    let city = form.querySelector("#city").value
-    let state = form.querySelector("#state").value
-    let zip = form.querySelector("#zip").value
-
-    // Put Data into Object
-    let contact = {
-      firstName: firstName,
-      lastName: lastName,
-      phone: phone,
-      address: {
-        street: street,
-        city: city,
-        state: state,
-        zip: zip
-      }
-    }
-
-    // POST data to Database
-    ContactCollection.POST(contact, form)
-      .then((newContact) => {
-        let newContactCard = Contact.buildCard(newContact)
-        ContactList.output(newContactCard)
-      })
-  },
   saveToDb: (event) => {
     // Get Data from Form
     event.preventDefault()
@@ -67,9 +31,36 @@ const ContactForm = {
         zip: zip
       }
     }
+    // If editing a contact, PATCH exisiting data
+    if(form.classList.contains("editing")) {
+      contact.id = form.getAttribute("data-contact")
+      return ContactCollection.PATCH(contact.id, contact)
+    } else {
+      // If its a new contact, POST data to Database
+      return ContactCollection.POST(contact, form)
+    }
+  },
+  edit: (contact) => {
+    let form = document.querySelector("#contact-form")
+    let firstName = form.querySelector("#firstName")
+    let lastName = form.querySelector("#lastName")
+    let phone = form.querySelector("#phone")
+    let street = form.querySelector("#street")
+    let city = form.querySelector("#city")
+    let state = form.querySelector("#state")
+    let zip = form.querySelector("#zip")
 
-    // POST data to Database
-    return ContactCollection.POST(contact, form)
+    firstName.value = contact.firstName
+    lastName.value = contact.lastName
+    phone.value = contact.phone
+    street.value = contact.address.street
+    city.value = contact.address.city
+    state.value = contact.address.state
+    zip.value = contact.address.zip
+
+    // Add a way to check if the form is editing and not creating a new contact
+    form.className = "editing"
+    form.setAttribute("data-contact", contact.id)
   }
 }
 

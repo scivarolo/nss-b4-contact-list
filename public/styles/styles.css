@@ -48,7 +48,7 @@ html {
   margin-bottom: 10px;
 }
 
-.contact__delete {
+.contact__buttons {
   margin-top: auto;
   align-self: flex-end;
 }
