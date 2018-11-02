@@ -8,38 +8,41 @@ const ContactForm = {
   saveToDb: (event) => {
     // Get Data from Form
     event.preventDefault()
-
-    // TODO: Add additional fields
     let form = document.querySelector("#contact-form")
-    let firstName = form.querySelector("#firstName").value
-    let lastName = form.querySelector("#lastName").value
-    let phone = form.querySelector("#phone").value
-    let street = form.querySelector("#street").value
-    let city = form.querySelector("#city").value
-    let state = form.querySelector("#state").value
-    let zip = form.querySelector("#zip").value
+    if( form.checkValidity() ) {
 
-    // Put Data into Object
-    let contact = {
-      firstName: firstName,
-      lastName: lastName,
-      phone: phone,
-      address: {
-        street: street,
-        city: city,
-        state: state,
-        zip: zip
+      let firstName = form.querySelector("#firstName").value
+      let lastName = form.querySelector("#lastName").value
+      let phone = form.querySelector("#phone").value
+      let street = form.querySelector("#street").value
+      let city = form.querySelector("#city").value
+      let state = form.querySelector("#state").value
+      let zip = form.querySelector("#zip").value
+
+      // Put Data into Object
+      let contact = {
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        address: {
+          street: street,
+          city: city,
+          state: state,
+          zip: zip
+        }
       }
-    }
-    if(form.classList.contains("editing")) {
-      // If editing a contact, PATCH exisiting data
-      contact.id = form.getAttribute("data-contact")
-      form.removeAttribute("class")
-      form.removeAttribute("data-contact")
-      return ContactCollection.PATCH(contact.id, contact, form)
+      if(form.classList.contains("editing")) {
+        // If editing a contact, PATCH exisiting data
+        contact.id = form.getAttribute("data-contact")
+        form.removeAttribute("class")
+        form.removeAttribute("data-contact")
+        return ContactCollection.PATCH(contact.id, contact, form)
+      } else {
+        // If its a new contact, POST data to Database
+        return ContactCollection.POST(contact, form)
+      }
     } else {
-      // If its a new contact, POST data to Database
-      return ContactCollection.POST(contact, form)
+      alert("Make sure no fields are blank!")
     }
   },
   edit: (contact) => {
