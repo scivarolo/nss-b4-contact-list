@@ -31,10 +31,12 @@ const ContactForm = {
         zip: zip
       }
     }
-    // If editing a contact, PATCH exisiting data
     if(form.classList.contains("editing")) {
+      // If editing a contact, PATCH exisiting data
       contact.id = form.getAttribute("data-contact")
-      return ContactCollection.PATCH(contact.id, contact)
+      form.removeAttribute("class")
+      form.removeAttribute("data-contact")
+      return ContactCollection.PATCH(contact.id, contact, form)
     } else {
       // If its a new contact, POST data to Database
       return ContactCollection.POST(contact, form)

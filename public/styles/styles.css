@@ -7,6 +7,23 @@ html {
   box-sizing: inherit;
 }
 
+button {
+  border: none;
+  background: greenyellow;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  margin: 5px;
+  border-radius: 15px;
+  transition: all .1s ease-in-out;
+}
+button:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  transform: scale(1.1);
+}
+button:active {
+  transform: scale(0.9);
+}
+
 #contact-form {
   max-width: 600px;
   margin: 0 auto;
@@ -51,4 +68,9 @@ html {
 .contact__buttons {
   margin-top: auto;
   align-self: flex-end;
+}
+
+.contact__delete {
+  background-color: red;
+  color: white;
 }

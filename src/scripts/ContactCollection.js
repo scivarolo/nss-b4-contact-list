@@ -35,13 +35,20 @@ const ContactCollection = {
       method: "DELETE"
     }).then(response => console.log(response))
   },
-  PATCH(id, contact) {
+  PATCH(id, contact, form) {
     return fetch(this.url + "/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(contact)
+    }).then((response) => {
+      if(response.ok) {
+        alert("Contact was successfully edited")
+      } else {
+        alert("Something went wrong. Try again!")
+      }
+      form.reset()
     })
   }
 }
