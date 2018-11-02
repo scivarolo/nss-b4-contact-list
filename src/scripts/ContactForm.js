@@ -12,10 +12,14 @@ const ContactForm = {
     // TODO: Add additional fields
     let form = document.querySelector("#contact-form")
     let contactName = form.querySelector("#name").value
+    let contactPhone = form.querySelector("#phone").value
+    let contactAddress = form.querySelector("#address").value
 
     // Put Data into Object
     let contact = {
-      name: contactName
+      name: contactName,
+      phone: contactPhone,
+      address: contactAddress
     }
 
     // POST data to Database
