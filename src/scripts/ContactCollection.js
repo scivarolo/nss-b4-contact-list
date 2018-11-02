@@ -5,7 +5,7 @@
 const ContactCollection = {
   url: "http://localhost:8088/contacts",
   GET() {
-    return fetch(this.url)
+    return fetch(`${this.url}/?_sort=lastName,firstName&_order=asc`)
       .then(response => response.json())
   },
   POST(contact, form) {
