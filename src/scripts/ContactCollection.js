@@ -24,6 +24,11 @@ const ContactCollection = {
       }
       return response.json()
     })
+  },
+  DELETE(id) {
+    return fetch(this.url + "/" + id, {
+      method: "DELETE"
+    }).then(response => console.log(response))
   }
 }
 
