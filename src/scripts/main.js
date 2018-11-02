@@ -3,9 +3,10 @@
 import ContactForm from "./ContactForm"
 import ContactList from "./ContactList"
 import ContactCollection from "./ContactCollection";
+import Contact from "./Contact";
 
 document.querySelector("#submit-form").addEventListener("click", (event) => {
-  ContactForm.saveToDatabase(event);
+  ContactForm.saveToDbThenOutput(event)
 });
 
 ContactCollection.GET()

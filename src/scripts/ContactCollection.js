@@ -22,6 +22,7 @@ const ContactCollection = {
       } else {
         alert("Something went wrong. Try again!")
       }
+      return response.json()
     })
   }
 }

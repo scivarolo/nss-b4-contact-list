@@ -3,9 +3,11 @@
 */
 
 import ContactCollection from "./ContactCollection"
+import ContactList from "./ContactList"
+import Contact from "./Contact"
 
 const ContactForm = {
-  saveToDatabase: (event) => {
+  saveToDbThenOutput: (event) => {
     // Get Data from Form
     event.preventDefault()
 
@@ -24,6 +26,10 @@ const ContactForm = {
 
     // POST data to Database
     ContactCollection.POST(contact, form)
+      .then((newContact) => {
+        let newContactCard = Contact.buildCard(newContact)
+        ContactList.output(newContactCard)
+      })
   }
 }
 
