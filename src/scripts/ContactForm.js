@@ -19,8 +19,7 @@ const ContactForm = {
     }
 
     // POST data to Database
-    ContactCollection.POST(contact)
-      .then(alert("Contact was successfully saved to Database."));
+    ContactCollection.POST(contact, form)
   }
 }
 

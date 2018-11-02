@@ -8,13 +8,20 @@ const ContactCollection = {
     return fetch(this.url)
       .then(response => response.json())
   },
-  POST(contact) {
+  POST(contact, form) {
     return fetch(this.url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(contact)
+    }).then(response => {
+      if(response.ok) {
+        alert("Contact was successfully saved to Database.")
+        form.reset()
+      } else {
+        alert("Something went wrong. Try again!")
+      }
     })
   }
 }
