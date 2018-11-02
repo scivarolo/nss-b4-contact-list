@@ -1,16 +1,23 @@
 /*
-  A ContactForm component that, when filled out and a submit button is pressed, adds a new contact to storage. It should import the ContactCollection component.
+  A ContactForm component that, when filled out and a submit button is pressed, adds a new contact to storage.
+
+  ContactForm.edit() populates the form with an exisiting contact.
+
+  ContactForm.saveToDb checks whether a new contact is being made or if a contact is being edited and then uses POST or PATCH to update the database
 */
 
 import ContactCollection from "./ContactCollection"
 
 const ContactForm = {
+
   saveToDb: (event) => {
-    // Get Data from Form
     event.preventDefault()
     let form = document.querySelector("#contact-form")
+
+    // Validate Form
     if( form.checkValidity() ) {
 
+      // Get Data from Form
       let firstName = form.querySelector("#firstName").value
       let lastName = form.querySelector("#lastName").value
       let phone = form.querySelector("#phone").value
@@ -31,6 +38,7 @@ const ContactForm = {
           zip: zip
         }
       }
+
       if(form.classList.contains("editing")) {
         // If editing a contact, PATCH exisiting data
         contact.id = form.getAttribute("data-contact")
@@ -45,7 +53,9 @@ const ContactForm = {
       alert("Make sure no fields are blank!")
     }
   },
+
   edit: (contact) => {
+    // Get Form Elements
     let form = document.querySelector("#contact-form")
     let firstName = form.querySelector("#firstName")
     let lastName = form.querySelector("#lastName")
@@ -55,6 +65,7 @@ const ContactForm = {
     let state = form.querySelector("#state")
     let zip = form.querySelector("#zip")
 
+    //Populate form fields with existing contact
     firstName.value = contact.firstName
     lastName.value = contact.lastName
     phone.value = contact.phone
@@ -67,6 +78,7 @@ const ContactForm = {
     form.className = "editing"
     form.setAttribute("data-contact", contact.id)
   }
+
 }
 
 export default ContactForm

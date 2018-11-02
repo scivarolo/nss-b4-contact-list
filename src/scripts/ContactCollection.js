@@ -1,5 +1,13 @@
 /*
-  A ContactCollection component that loads existing contacts from storage, and saves new ones. Each new contact should have an auto-generated identifier.
+  ContactCollection contains methods for interacting with the contacts database.
+
+  ContactCollection.GET: Get everything sorted by last name, or if an ID is passed, only retrieve that item.
+
+  ContactCollection.POST: Take form data and add to database, then if successful clear the form.
+
+  ContactCollection.DELETE: Deletes a contact form the database
+
+  ContactCollection.PATCH: Edits a contact, and clears the form
 */
 
 const ContactCollection = {

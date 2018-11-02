@@ -3,9 +3,14 @@ import ContactForm from "./ContactForm";
 
 /*
   A Contact component that displays a person's name, phone number, and address.
+  Contact.buildEl() builds elements that are combined in Contact.buildCard()
 */
 
 const Contact = {
+  /*
+    Element factory to build HTML elements.
+    Returns an element
+  */
   buildEl(el, attrObj, content, ...children) {
     // HTML Element Factory
     let element = document.createElement(el)
@@ -18,6 +23,12 @@ const Contact = {
     })
     return element
   },
+
+  /*
+    Uses this.buildEl to put together a contact card.
+    This includes event listeners for edit and delete buttons
+    Returns a document fragment to pass to ContactList.build()
+  */
   buildCard(contact) {
     let fragment = document.createDocumentFragment()
     let nameEl = this.buildEl("h2", {class: "contact__name"}, `${contact.firstName} ${contact.lastName}`)
@@ -45,6 +56,7 @@ const Contact = {
     fragment.appendChild(wrapper)
     return fragment
   }
+
 }
 
 export default Contact
