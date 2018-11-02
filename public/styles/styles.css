@@ -1,0 +1,49 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.contact-list__heading {
+  width: 100%;
+  text-align: center;
+}
+
+.contact-card {
+  flex-basis: 200px;
+  margin: 20px;
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__name {
+  margin-top: 0;
+}
+
+.contact__address p {
+  margin: 0;
+}
+
+.contact__address {
+  margin-bottom: 10px;
+}
+
+.contact__delete {
+  margin-top: auto;
+  align-self: flex-end;
+}
