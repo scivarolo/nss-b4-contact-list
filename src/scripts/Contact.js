@@ -46,7 +46,7 @@ const Contact = {
 
     let deleteButton = this.buildEl("button", {class:"contact__delete"}, "Delete")
     deleteButton.addEventListener("click", () => {
-      ContactCollection.DELETE(contact.id)
+      ContactCollection.deleteContact(contact.id)
         .then(() => document.querySelector(`#contact-${contact.id}`).remove())
     })
 

@@ -1,9 +1,9 @@
 /*
   ContactCollection contains methods for interacting with the contacts database.
 
-  ContactCollection.GET: Get everything sorted by last name, or if an ID is passed, only retrieve that item.
+  ContactCollection.getContacts: Get everything sorted by last name, or if an ID is passed, only retrieve that item.
 
-  ContactCollection.POST: Take form data and add to database, then if successful clear the form.
+  ContactCollection.saveContact: Take form data and add to database, then if successful clear the form.
 
   ContactCollection.DELETE: Deletes a contact form the database
 
@@ -12,7 +12,7 @@
 
 const ContactCollection = {
   url: "http://localhost:8088/contacts",
-  GET(id) {
+  getContacts(id) {
     if(id) {
       return fetch(`${this.url}/${id}`)
         .then(response => response.json())
@@ -21,7 +21,7 @@ const ContactCollection = {
       .then(response => response.json())
     }
   },
-  POST(contact, form) {
+  saveContact(contact, form) {
     return fetch(this.url, {
       method: "POST",
       headers: {
@@ -38,12 +38,12 @@ const ContactCollection = {
       return response.json()
     })
   },
-  DELETE(id) {
+  deleteContact(id) {
     return fetch(this.url + "/" + id, {
       method: "DELETE"
     }).then(response => console.log(response))
   },
-  PATCH(id, contact, form) {
+  updateContact(id, contact, form) {
     return fetch(this.url + "/" + id, {
       method: "PATCH",
       headers: {

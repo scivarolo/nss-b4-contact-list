@@ -9,7 +9,7 @@ import ContactCollection from "./ContactCollection";
 document.querySelector("#submit-form").addEventListener("click", (event) => {
   // ContactForm.saveToDbThenOutput(event)
   ContactForm.saveToDb(event)
-  .then(() => ContactCollection.GET())
+  .then(() => ContactCollection.getContacts())
   .then(contacts => {
     let list = ContactList.build(contacts)
     let existing = document.querySelectorAll(".contact-card")
@@ -22,7 +22,7 @@ document.querySelector("#submit-form").addEventListener("click", (event) => {
 
 // Populate the contact list on page load
 
-ContactCollection.GET()
+ContactCollection.getContacts()
   .then(contacts => {
     let list = ContactList.build(contacts)
     ContactList.output(list)

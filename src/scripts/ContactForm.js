@@ -44,10 +44,10 @@ const ContactForm = {
         contact.id = form.getAttribute("data-contact")
         form.removeAttribute("class")
         form.removeAttribute("data-contact")
-        return ContactCollection.PATCH(contact.id, contact, form)
+        return ContactCollection.updateContact(contact.id, contact, form)
       } else {
         // If its a new contact, POST data to Database
-        return ContactCollection.POST(contact, form)
+        return ContactCollection.saveContact(contact, form)
       }
     } else {
       alert("Make sure no fields are blank!")
